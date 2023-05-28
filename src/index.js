@@ -1,38 +1,56 @@
-// import fetchCatByBreed from '../src/cat-api.js';
+import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
 
-const select=document.querySelector('.breed-select');
+const breedSelect = document.getElementById('breed-select');
 const catInfo = document.querySelector('.cat-info');
 const catImage = document.getElementById('cat-image');
-const catBreed = document.('cat-breed');
+const catBreed = document.getElementById('cat-breed');
 const catDescription = document.getElementById('cat-description');
 const catTemperament = document.getElementById('cat-temperament');
+const loader = document.querySelector('.loader');
+const error = document.querySelector('.error');
 
-select.addEventListener('click', fetchCatByBreed);
-console.log(select)
-const API_KEY='live_AgvW44RRkBoARXNb9CJZhKTjSdlkAhOoBVX0pvtPvud2h88FCArREoa62LESXVz8';
-const BASE_URL='https://api.thecatapi.com/v1';
-
-function fetchCatByBreed (){
-return fetch(`${BASE_URL}/breeds?key=${API_KEY}`)//отримую доступ до масиву об'єктів. 
-.then(resp=>{console.log(resp)
-if(!resp.ok){
-throw new Error(resp.statusText)}
-return resp.json()
-})
-.then((data)=>data.map(breed=>({ id: breed.id, name: breed.name })))// data-це кожен об'єкт  масиву, призначаємо його властивостям свої імена
-.catch(err=>console.error(Error))
-.finally(()=>console.log('finally'))}
-
-function fetchCatByBreed(breedId)
- {
-return fetch(`${BASE_URL}/breeds?key=${API_KEY}&breed_ids=${breedId}`)
-      .then(response => response.json())
-      .then(data => data[0])
-      .catch(error => {
-        console.error('Error fetching cat:', error);
-        throw error;
+function populateBreeds() {
+  fetchBreeds()
+    .then(breeds => {
+      breeds.forEach(breed => {
+        const option = document.createElement('option');
+        option.value = breed.id;
+        option.textContent = breed.name;
+        breedSelect.appendChild(option);
       });
-  }
 
+      breedSelect.addEventListener('change', handleBreedSelect);
+      breedSelect.removeAttribute('disabled');
+      loader.style.display = 'none';
+    })
+    .catch(() => {
+      showError();
+      loader.style.display = 'none';
+    });
+}
 
-getElementById
+function handleBreedSelect() {
+  const breedId = breedSelect.value;
+
+  fetchCatByBreed(breedId)
+    .then(cat => {
+      catBreed.textContent = cat.breeds[0].name;
+      catDescription.textContent = cat.breeds[0].description;
+      catTemperament.textContent = `Temperament: ${cat.breeds[0].temperament}`;
+      catImage.src = cat.url;
+
+      catInfo.style.display = 'block';
+      loader.style.display = 'none';
+    })
+    .catch(() => {
+      showError();
+      loader.style.display = 'none';
+    });
+}
+
+function showError() {
+  error.style.display = 'block';
+}
+
+loader.style.display = 'block';
+populateBreeds();
