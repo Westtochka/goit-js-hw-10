@@ -14,9 +14,13 @@ function populateBreeds() {
     .then(breeds => {
       breeds.forEach(breed => {
         const option = document.createElement('option');
-        option.value = breed.id;
+        option.value = breed.reference_image_id;
+        // option.value = breed.id;
+        console.log(breed.id)
+        console.log(breed)
         option.textContent = breed.name;
         breedSelect.appendChild(option);
+        console.log(breedSelect)
       });
 
       breedSelect.addEventListener('change', handleBreedSelect);
@@ -30,8 +34,9 @@ function populateBreeds() {
 }
 
 function handleBreedSelect() {
-  const breedId = breedSelect.value;
-
+  const breedId = breedSelect.value; 
+  console.log(breedSelect)
+  console.log(breedId)
   fetchCatByBreed(breedId)
     .then(cat => {
       catBreed.textContent = cat.breeds[0].name;
