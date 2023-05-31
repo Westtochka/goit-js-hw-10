@@ -15,7 +15,6 @@ function populateBreeds() {
       breeds.forEach(breed => {
         const option = document.createElement('option');
         option.value = breed.reference_image_id;
-        // option.value = breed.id;
         console.log(breed.id)
         console.log(breed)
         option.textContent = breed.name;
@@ -47,10 +46,10 @@ function handleBreedSelect() {
       catInfo.style.display = 'block';
       loader.style.display = 'none';
     })
-    .catch(() => {
-      showError();
-      loader.style.display = 'none';
-    });
+    // .catch(() => {
+    //   showError();
+    //   loader.style.display = 'none';
+    // });
 }
 
 function showError() {

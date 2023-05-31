@@ -7,23 +7,17 @@ export function fetchBreeds (){
         if(!resp.ok){
         throw new Error(resp.statusText)}
         return resp.json()
-        })
-        .then((data)=>data.map(breed=>({ id: breed.id, name: breed.name })))// data-це кожен об'єкт  масиву, призначаємо його властивостям свої імена
-        .catch(err=>console.error(Error))
-        .finally(()=>console.log('finally'))}
-        
+        });}
+            
         
 export function fetchCatByBreed (breedId){
-        //  return fetch(`https://api.thecatapi.com/v1/images/${breedId}`)
-        // return fetch(`https://api.thecatapi.com/v1/images?${breedId}&x-api-key=${API_KEY}`)
-        // https://api.thecatapi.com/v1/images/${breedId}
-        return fetch(`https://api.thecatapi.com/v1/images/search?x-api-key=${API_KEY}&breed_ids=${breedId}`)
-          .then(response => response.json())
-              .then(data => data[0])
-              .catch(error => {
-                console.error('Error fetching cat:', error);
-                throw error;
-              });
+        return fetch(`https://api.thecatapi.com/v1/images/${breedId}`).then(
+          response => {
+            if(!response.ok){
+              throw new Error(response.statusText);
+            }
+            return response.json();
           }
+          )}
 
 
