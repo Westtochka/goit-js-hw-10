@@ -20,11 +20,12 @@ function populateBreeds() {
       const markup = createOptions(breeds);
       addMarkup(markup, breedSelect);//
       // breedSelect.removeAttribute('disabled');
-      // loader.style.display = 'none';
+      loader.style.display = 'none';
     })
     .catch(() => {
       showError();
       loader.style.display = 'none';
+
     });
 }
 //перебирає кожен елемент(обєкт) масиву, що прийшов і бере властивості і вставляє їх в розмітку-це масив, збирає масив в строку.
@@ -57,6 +58,7 @@ fetchCatByBreed (breedId)
 .then(cat => {
   const markup = createCard(cat);//
   addMarkup(markup, catInfo);
+  error.style.display = 'none';
   // catInfo.style.display = 'block';
   loader.style.display = 'none';
 })
