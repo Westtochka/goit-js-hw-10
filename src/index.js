@@ -72,7 +72,9 @@ fetchCatByBreed (breedId)
 });}
 
 function showError() {
-  form.reset();
+  // form.reset();
+  catInfo.style.display='none';
+  breedSelect.value = "";
   error.style.display = 'block';
   loader.style.display = 'none';
 }
