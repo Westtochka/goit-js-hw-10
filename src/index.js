@@ -74,8 +74,10 @@ fetchCatByBreed (breedId)
 function showError() {
   catInfo.style.display='none';
   breedSelect.value = "";
+  // handleBreedSelect()
   error.style.display = 'block';
   loader.style.display = 'none';
+
 }
 
 
