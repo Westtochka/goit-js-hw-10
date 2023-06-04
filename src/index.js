@@ -70,7 +70,7 @@ fetchCatByBreed (breedId)
   showError();
   breedSelect.value = "";
   catInfo.innerHTML = "";  
-  form.reset()
+  form.style.display = 'none';
 
 });}
 
