@@ -52,7 +52,7 @@ function createCard({
 }
 
 function addMarkup(markup = '', elem) {
- elem.innerHTML = markup;  
+elem.innerHTML = markup;  
 }
 
 function handleBreedSelect() {
@@ -68,16 +68,16 @@ fetchCatByBreed (breedId)
 })
 .catch(() => {
   showError();
- 
+  breedSelect.value = "";
+  catInfo.innerHTML = "";  
+  form.reset()
+
 });}
 
 function showError() {
-  catInfo.style.display='none';
-  breedSelect.value = "";
-  // handleBreedSelect()
   error.style.display = 'block';
   loader.style.display = 'none';
-
+  
 }
 
 
