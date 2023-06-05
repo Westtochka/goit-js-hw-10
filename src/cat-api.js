@@ -8,7 +8,7 @@ export function fetchBreeds (){
         throw new Error(resp.statusText)}
         return resp.json()
         });}
-            
+    
         
 export function fetchCatByBreed (breedId){
         return fetch(`https://api.thecatapi.com/v1/images/${breedId}`).then(

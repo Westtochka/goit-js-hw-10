@@ -68,10 +68,14 @@ fetchCatByBreed (breedId)
 })
 .catch(() => {
   showError();
+  // 
+  form.reset()
   breedSelect.value = "";
-  catInfo.innerHTML = "";  
-  form.style.display = 'none';
-
+  // catInfo.style.display = 'none';
+  // form.reset()
+  // form.style.display = 'none';
+  // breedSelect.style.display = 'block';
+  addMarkup(markup = '', catInfo)
 });}
 
 function showError() {
